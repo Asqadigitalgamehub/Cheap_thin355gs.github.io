@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Purchase Form</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            font-family: 'Arial', sans-serif;
+        }
+
+        iframe {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Embed the Google Form -->
+    <iframe 
+        id="googleForm" 
+        src="https://docs.google.com/forms/d/e/1FAIpQLScKsdSJY0GCnPPFb6G_ZvURzCt3AqZe_qpINscjCZVUOHfgcQ/viewform?embedded=true" 
+        width="640" 
+        height="800">
+        Loading…
+    </iframe>
+
+    <script>
+        const formIframe = document.getElementById("googleForm");
+
+        // Monitor changes in the iframe's URL
+        formIframe.addEventListener("load", () => {
+            try {
+                // Check if the iframe's URL contains the form submission confirmation
+                const iframeSrc = formIframe.contentWindow.location.href;
+
+                if (iframeSrc.includes("formResponse")) {
+                    // Redirect to another page
+                    window.location.href = "qrcode.html"; // Replace with your desired URL
+                }
+            } catch (error) {
+                // Catch cross-origin errors silently
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>
